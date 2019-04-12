@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+
+set host [lindex $argv 0]
+set password [lindex $argv 1]
+set inside_host [lindex $argv 2]
+set inside_password [lindex $argv 3]
+
+set timeout 300
+
+spawn ssh $host
+
+trap {
+    set rows [stty rows]
+    set cols [stty columns]
+    stty rows $rows columns $cols < $spawn_out(slave,name)
+} WINCH
+
+expect {
+    "password:" { send "$password\r"; }
+    "Are you sure you want to continue connecting (yes/no)?" { send "yes\r"; exp_continue }
+}
+send "ssh $inside_host\r"
+expect "password:" { send "$inside_password\r" }
+interact

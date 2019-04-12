@@ -1,0 +1,4 @@
+hosts='host1 host2 host3 host4 host5'
+user='user'
+password='password'
+inside_password='inside_password'
