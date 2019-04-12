@@ -6,9 +6,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 paramfile=$1
-echo "Open $paramfile"
 
-ls $paramfile
 . "$paramfile"
 
 host=$(shuf -n1 -e $hosts)
