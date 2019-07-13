@@ -19,6 +19,10 @@ expect {
     "password:" { send "$password\r"; }
     "Are you sure you want to continue connecting (yes/no)?" { send "yes\r"; exp_continue }
 }
-send "ssh $inside_host\r"
-expect "password:" { send "$inside_password\r" }
+
+if { $inside_host != "" } {
+    send "ssh $inside_host\r"
+    expect "password:" { send "$inside_password\r" }
+}
+
 interact
