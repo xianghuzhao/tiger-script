@@ -21,6 +21,7 @@ expect {
 }
 
 if { $inside_host != "" } {
+    after 100
     send "ssh $inside_host\r"
     expect "password:" { send "$inside_password\r" }
 }
